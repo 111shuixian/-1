@@ -1,0 +1,93 @@
+Tim库函数
+以下为时基单元的时钟源选择（共6个）
+void TIM_InternalClockConfig(TIM_TypeDef* TIMx);//选择内部时钟
+void TIM_ITRxExternalClockConfig(TIM_TypeDef* TIMx, uint16_t TIM_InputTriggerSource);//选择ITRX其它定时器的时钟，参
+数1选择要配置的定时器，2选择要接入哪个其他的定时器
+void TIM_TIxExternalClockConfig(TIM_TypeDef* TIMx, uint16_t TIM_TIxExternalCLKSource,
+                                uint16_t TIM_ICPolarity, uint16_t ICFilter);//选择TIX捕获通道的时钟，参数1选择
+要配置的定时器，2选择要接入哪个TIX通道，3选择捕获极性，4选择滤波器
+void TIM_ETRClockMode1Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, uint16_t TIM_ExtTRGPolarity,
+                             uint16_t ExtTRGFilter);//选择ETR外部时钟模式1，参数1选择要配置的定时器，2选择预分频器，
+3选择极性，4选择滤波器
+void TIM_ETRClockMode2Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, 
+                             uint16_t TIM_ExtTRGPolarity, uint16_t ExtTRGFilter);//选择ETR外部时钟模式2，
+参数1选择要配置的定时器，2选择预分频器，3选择极性，4选择滤波器
+void TIM_ETRConfig(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, uint16_t TIM_ExtTRGPolarity,
+                   uint16_t ExtTRGFilter);//单独配置参数
+参数1选择要配置的定时器，2选择预分频器，3选择极性，4选择滤波器
+
+时基单元：
+void TIM_TimeBaseInit(TIM_TypeDef* TIMx, TIM_TimeBaseInitTypeDef* TIM_TimeBaseInitStruct);//时基单元初始化，1选择定时器，
+2结构体包含响应函数
+void TIM_TimeBaseStructInit(TIM_TimeBaseInitTypeDef* TIM_TimeBaseInitStruct);//给结构体变量赋默认值
+
+
+中断输出控制：
+TIM_ITConfig(TIM_TypeDef* TIMx, uint16_t TIM_IT, FunctionalState NewState);//使能中断输出信号，第一个参数选择定时器
+第二个选择要配置哪个中断输出，第三个使能还是失能
+
+
+运行控制：
+void TIM_Cmd(TIM_TypeDef* TIMx, FunctionalState NewState);//使能计数器，第一个选择计数器，第二个填模式，使能可运行，失能
+不可运行
+
+
+另外还有一些用来修改已经初始化了的参数：
+void TIM_PrescalerConfig(TIM_TypeDef* TIMx, uint16_t Prescaler, uint16_t TIM_PSCReloadMode);//更改预分频器，
+参数1选择定时器，2要写入的预分频值，3选择预分频器的重装载模式（写入模式）
+void TIM_CounterModeConfig(TIM_TypeDef* TIMx, uint16_t TIM_CounterMode);//更改计数器模式，
+参数1选择定时器，2选择计数器模式
+void TIM_ARRPreloadConfig(TIM_TypeDef* TIMx, FunctionalState NewState);//更改自动重装载寄存器的预装载功能，
+参数1选择定时器，2选择使能还是失能
+void TIM_SetCounter(TIM_TypeDef* TIMx, uint16_t Counter);//设置计数器的值，
+参数1选择定时器，2选择要写入的计数器值
+void TIM_SetAutoreload(TIM_TypeDef* TIMx, uint16_t Autoreload);//设置自动重装载寄存器的值，
+参数1选择定时器，2选择要写入的自动重装载寄存器值
+uint16_t TIM_GetCounter(TIM_TypeDef* TIMx);//获取计数器的值，参数1选择定时器
+uint16_t TIM_GetPrescaler(TIM_TypeDef* TIMx);//获取当前预分频器的值，参数1选择定时器
+
+
+获取标志位/清除标志位
+FlagStatus TIM_GetFlagStatus(TIM_TypeDef* TIMx, uint16_t TIM_FLAG);
+void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG);
+ITStatus TIM_GetITStatus(TIM_TypeDef* TIMx, uint16_t TIM_IT);
+void TIM_ClearITPendingBit(TIM_TypeDef* TIMx, uint16_t TIM_IT);
+
+
+
+配置输出比较单元
+void TIM_OC1Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);//选择输出比较单元1，参数1选择定时器，2结构体
+void TIM_OC2Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
+void TIM_OC3Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
+void TIM_OC4Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
+void TIM_OCStructInit(TIM_OCInitTypeDef* TIM_OCInitStruct);//给输出比较结构体变量赋默认值
+
+void TIM_ForcedOC1Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);//强制输出比较单元1，参数1选择定时器，2选择强制动作
+void TIM_ForcedOC2Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);
+void TIM_ForcedOC3Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);
+void TIM_ForcedOC4Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);
+
+单独修改极性
+void TIM_OC1PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);
+void TIM_OC1NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);
+void TIM_OC2PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);
+void TIM_OC2NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);
+void TIM_OC3PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);
+void TIM_OC3NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);
+void TIM_OC4PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);
+
+单独修改使能
+void TIM_CCxCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCx);
+void TIM_CCxNCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCxN);
+
+单独更改输出比较模式
+void TIM_SelectOCxM(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_OCMode);
+
+单独更改CCR寄存器的值
+void TIM_SetCompare1(TIM_TypeDef* TIMx, uint16_t Compare1);
+void TIM_SetCompare2(TIM_TypeDef* TIMx, uint16_t Compare2);
+void TIM_SetCompare3(TIM_TypeDef* TIMx, uint16_t Compare3);
+void TIM_SetCompare4(TIM_TypeDef* TIMx, uint16_t Compare4);
+
+使用高级定时器输出PWM时需要使用该函数使能输出
+void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);
