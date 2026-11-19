@@ -1,0 +1,45 @@
+C51 COMPILER V9.60.7.0   P2                                                                09/25/2026 17:08:50 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE P2
+OBJECT MODULE PLACED IN .\Objects\p2.obj
+COMPILER INVOKED BY: D:\keil5\C51\BIN\C51.EXE p2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\p2.lst) 
+                    -TABS(2) OBJECT(.\Objects\p2.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include <intrins.h>  //???????? _crol_
+   3          
+   4          void Delay500ms(void) //????,??500ms @12MHz
+   5          {
+   6   1        unsigned char i,j,k;
+   7   1        for(i=15;i>0;i--)
+   8   1          for(j=200;j>0;j--)
+   9   1            for(k=248;k>0;k--);
+  10   1      }
+  11          
+  12          void main(void)
+  13          {
+  14   1        unsigned char led = 0xFE;  //?? 1111 1110,?????
+  15   1        while(1)
+  16   1        {
+  17   2          P2 = led;
+  18   2          Delay500ms();
+  19   2          led = _crol_(led,1);  //????1?
+  20   2        }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
